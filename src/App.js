@@ -23,10 +23,6 @@ class App extends Component {
           )
         }/>
       </Switch>
-      
-      // <div>
-      //   <Palette palette={generatePalette(seedColors[0])}/>
-      // </div>
     );
   }
 }
