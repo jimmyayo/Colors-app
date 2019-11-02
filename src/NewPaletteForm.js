@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -75,7 +76,9 @@ const useStyles = makeStyles(theme => ({
 function NewPaletteForm() {
     const classes = useStyles();
     const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
+    const [currentColor, setCurrentColor] = useState("teal");
+    const [colors, setColors] = useState(["purple", "#5EDEDE"]);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -84,6 +87,12 @@ function NewPaletteForm() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    const addColor = () => {
+        console.log('Current color: ' + currentColor);
+        setColors(colors.concat(currentColor));
+        console.log('All colors: ' + colors);
+    }
 
     return (
         <div className={classes.root}>
@@ -115,7 +124,7 @@ function NewPaletteForm() {
             anchor="left"
             open={open}
             classes={{
-            paper: classes.drawerPaper,
+                paper: classes.drawerPaper,
             }}
         >
             <div className={classes.drawerHeader}>
@@ -135,10 +144,14 @@ function NewPaletteForm() {
             </div>
 
             <ChromePicker 
-                color='purple'
-                onChangeComplete={ (newColor) => console.log(newColor) } />
+                color={currentColor}
+                onChangeComplete={ (newColor) => setCurrentColor(newColor.hex) } />
             
-            <Button variant="contained" color="primary">Add Color</Button>
+            <Button variant="contained" color="primary" 
+                style={{backgroundColor: currentColor}} 
+                onClick={addColor}>
+                Add Color
+            </Button>
             
         </Drawer>
         <main
@@ -148,6 +161,11 @@ function NewPaletteForm() {
         >
             <div className={classes.drawerHeader} />
             
+            <ul>
+                {colors.map(c => (
+                    <li style={{backgroundColor:c}}>{c}</li>
+                ))}
+            </ul>
             
         </main>
         </div>
