@@ -76,7 +76,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function NewPaletteForm() {
+function NewPaletteForm(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
@@ -118,12 +118,25 @@ function NewPaletteForm() {
         );
       }, [currentColor, colors]);
     
+    const handleSave = () => {
+        let newName = "My new palette";
+
+        const newPalette = {
+            paletteName: newName,
+            id: newName.toLowerCase().replace(/ /g, "-"),
+            colors: colors
+        }
+        props.savePalette(newPalette);
+        props.history.push('/');
+    }
+    
 
     return (
         <div className={classes.root}>
         <CssBaseline />
         <AppBar
             position="fixed"
+            color="default"
             className={clsx(classes.appBar, {
             [classes.appBarShift]: open,
             })}
@@ -141,6 +154,7 @@ function NewPaletteForm() {
             <Typography variant="h6" noWrap>
                 New Palette
             </Typography>
+            <Button variant="contained" color="primary" onClick={handleSave}>Save Palette</Button>
             </Toolbar>
         </AppBar>
         <Drawer
