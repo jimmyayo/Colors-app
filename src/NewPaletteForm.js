@@ -17,6 +17,8 @@ import { ChromePicker } from 'react-color';
 import DraggableColorBox from './DraggableColorBox';
 import DraggableColorList from './DraggableColorList';
 import { arrayMove } from 'react-sortable-hoc';
+import { Link } from 'react-router-dom';
+import PaletteFormNav from './PaletteFormNav';
 
 
 const drawerWidth = 400;
@@ -82,14 +84,12 @@ const useStyles = makeStyles(theme => ({
 const NewPaletteForm = (props) => {
     // Default props w/ Hooks:
     const { maxColors = 20} = props;
-
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
     const [currentColor, setCurrentColor] = useState("teal");
     const [colors, setColors] = useState(props.palettes[0].colors);
     const [newColorName, setnewColorName] = useState("");
-    const [newPaletteName, setNewPaletteName] = useState("");
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -146,20 +146,16 @@ const NewPaletteForm = (props) => {
         );
       }, [currentColor, colors]);
     
-      useEffect(() => {
-        ValidatorForm.addValidationRule('isPaletteNameUnique', (value) =>
-            props.palettes.every(
-                ({paletteName}) => paletteName.toLowerCase() !== value.toLowerCase()
-          )
-        );
-      }, [newPaletteName]);
+    
+    const handleSubmit = (paletteName) => {
+        console.log(paletteName);
 
-    const handleSubmit = () => {
         const newPalette = {
-            paletteName: newPaletteName,
-            id: newPaletteName.toLowerCase().replace(/ /g, "-"),
+            paletteName: paletteName,
+            id: paletteName.toLowerCase().replace(/ /g, "-"),
             colors: colors
         }
+
         props.savePalette(newPalette);
         props.history.push('/');
     }
@@ -167,40 +163,14 @@ const NewPaletteForm = (props) => {
 
     return (
         <div className={classes.root}>
-        <CssBaseline />
-        <AppBar
-            position="fixed"
-            color="default"
-            className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
-            })}
-        >
-            <Toolbar>
-            <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="start"
-                className={clsx(classes.menuButton, open && classes.hide)}
-            >
-                <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap>
-                New Palette
-            </Typography>
-            <ValidatorForm onSubmit={handleSubmit}>
-                <TextValidator 
-                    label="Palette name" 
-                    value={newPaletteName} 
-                    onChange={ e => setNewPaletteName(e.target.value)}
-                    validators={['required', 'isPaletteNameUnique']}
-                    errorMessages={['Enter palette name', 'This palette name is already used']} />
-                <Button variant="contained" color="primary" type="submit">Save Palette</Button>
-            </ValidatorForm>
 
-            
-            </Toolbar>
-        </AppBar>
+        <PaletteFormNav
+            open={open}
+            classes={classes}
+            palettes={props.palettes}
+            handleSubmit={handleSubmit}
+            handleDrawerOpen={handleDrawerOpen} />
+
         <Drawer
             className={classes.drawer}
             variant="persistent"
