@@ -101,11 +101,11 @@ const NewPaletteForm = props => {
 
   const addRandomColor = () => {
     // pick random color from all existing palettes
-    const allColors = props.palettes.map(p => p.colors).flat()
+    const allColors = props.palettes.map(p => p.colors).flat();
 
-    let rand = Math.floor(Math.random() * allColors.length)
-    const randColor = allColors[rand]
-    setColors(colors.concat(randColor))
+    let rand = Math.floor(Math.random() * allColors.length);
+    const randColor = allColors[rand];
+    setColors(colors.concat(randColor));
   }
 
   // function for sorting ColorBoxes
@@ -113,16 +113,13 @@ const NewPaletteForm = props => {
     setColors(arrayMove(colors, oldIndex, newIndex))
   }
 
-  const paletteFull = colors.length >= maxColors
+  const paletteFull = colors.length >= maxColors;
 
-  const handleSubmit = paletteName => {
-    const newPalette = {
-      paletteName: paletteName,
-      id: paletteName.toLowerCase().replace(/ /g, '-'),
-      colors: colors
-    }
-    props.savePalette(newPalette)
-    props.history.push('/')
+  const handleSubmit = newPalette => {
+    newPalette.id = newPalette.paletteName.toLowerCase().replace(/ /g, '-');
+    newPalette.colors = colors;
+    props.savePalette(newPalette);
+    props.history.push('/');
   }
 
   return (
