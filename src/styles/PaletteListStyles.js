@@ -1,5 +1,5 @@
 import sizes from './sizes';
-import background from './bg.svg';
+import background from './Subtle-Prism.svg';
 
 export default {
     root: {
