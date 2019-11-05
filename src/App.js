@@ -11,12 +11,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     const savecPalettes = JSON.parse(window.localStorage.getItem("palettes"));
-    this.state = {palettes: savecPalettes || seedColors};
+    this.state = { palettes: savecPalettes || seedColors };
 
     this.savePalette = this.savePalette.bind(this);
     this.findPalette = this.findPalette.bind(this);
-
-    
   }
 
   findPalette(id) {

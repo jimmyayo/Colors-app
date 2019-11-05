@@ -12,7 +12,7 @@ export default {
         alignItems: "flex-start",
         flexDirection: "column",
         flexWrap: "wrap"
-        
+
     },
     nav: {
         display: "flex",
@@ -22,7 +22,6 @@ export default {
         alignItems: "center",
         "& a": {
             color: "white",
-            
         }
     },
     palettes: {

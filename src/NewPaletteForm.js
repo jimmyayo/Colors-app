@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import clsx from 'clsx';
-import { useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -18,7 +17,6 @@ const NewPaletteForm = props => {
   // Default props w/ Hooks:
   const { maxColors = 20 } = props;
   const classes = useStyles();
-  const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const [colors, setColors] = useState(props.palettes[0].colors);
 
