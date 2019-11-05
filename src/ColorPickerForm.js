@@ -1,32 +1,14 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
-import Button from '@material-ui/core/Button'
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
-import { ChromePicker } from 'react-color'
-import { makeStyles } from '@material-ui/core/styles'
-
-const useStyles = makeStyles(() => ({
-  picker: {
-    width: '100% !important',
-    marginTop: '2rem'
-  },
-  addColor: {
-    width: '100%',
-    padding: '1rem',
-    marginTop: '1rem',
-    fontSize: '2rem'
-  },
-  colorNameInput: {
-    width: '100%',
-    height: '70px'
-  }
-}))
+import React, { useState, useEffect } from 'react';
+import Button from '@material-ui/core/Button';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { ChromePicker } from 'react-color';
+import useStyles from './styles/ColorPickerFormStyles';
 
 const ColorPickerForm = function (props) {
-  const { paletteFull, addColor, colors } = props
-  const [currentColor, setCurrentColor] = useState('teal')
-  const [newColorName, setnewColorName] = useState('')
-  const classes = useStyles()
+  const { paletteFull, addColor, colors } = props;
+  const [currentColor, setCurrentColor] = useState('teal');
+  const [newColorName, setnewColorName] = useState('');
+  const classes = useStyles();
 
   useEffect(
     () => {
@@ -35,7 +17,7 @@ const ColorPickerForm = function (props) {
       )
     },
     [newColorName, colors]
-  )
+  );
 
   useEffect(
     () => {
@@ -46,21 +28,21 @@ const ColorPickerForm = function (props) {
       )
     },
     [currentColor, colors]
-  )
+  );
 
   const handleSubmit = function () {
-    addColor(currentColor, newColorName)
-    setnewColorName('')
+    addColor(currentColor, newColorName);
+    setnewColorName('');
   }
 
   const handleColorChange = function (newColor) {
-    const r = newColor.rgb.r
-    const g = newColor.rgb.g
-    const b = newColor.rgb.b
-    const a = newColor.rgb.a
-    const rgbaColor = `rgba(${r},${g},${b},${a})`
+    const r = newColor.rgb.r;
+    const g = newColor.rgb.g;
+    const b = newColor.rgb.b;
+    const a = newColor.rgb.a;
+    const rgbaColor = `rgba(${r},${g},${b},${a})`;
 
-    setCurrentColor(rgbaColor)
+    setCurrentColor(rgbaColor);
   }
 
   return (

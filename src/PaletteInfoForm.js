@@ -8,11 +8,11 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import { Picker } from 'emoji-mart'
-import 'emoji-mart/css/emoji-mart.css'
+import 'emoji-mart/css/emoji-mart.css';
 
 function PaletteInfoForm (props) {
-  const [newPaletteName, setNewPaletteName] = useState('')
-  const [stage, setStage] = useState('form')
+  const [newPaletteName, setNewPaletteName] = useState('');
+  const [stage, setStage] = useState('form');
 
   useEffect(
     () => {
@@ -23,7 +23,7 @@ function PaletteInfoForm (props) {
       )
     },
     [newPaletteName, props.palettes]
-  )
+  );
 
   const showEmojiPicker = function () {
     setStage('emoji');
@@ -33,8 +33,8 @@ function PaletteInfoForm (props) {
     const newPalette = {
       paletteName: newPaletteName,
       emoji: emoji.native
-    }
-    props.handleSubmit(newPalette)
+    };
+    props.handleSubmit(newPalette);
   }
 
   return (
