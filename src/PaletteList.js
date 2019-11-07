@@ -14,6 +14,7 @@ import CheckIcon from "@material-ui/icons/Check";
 import CloseIcon from "@material-ui/icons/Close";
 import blue from "@material-ui/core/colors/blue";
 import red from "@material-ui/core/colors/red";
+import Button from "@material-ui/core/Button";
 import styles from './styles/PaletteListStyles';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
@@ -21,7 +22,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 class PaletteList extends Component {
     constructor(props) {
         super(props);
-        this.state= {
+        this.state = {
             openDeleteDialog: false,
             deletingId: ''
         };
@@ -31,13 +32,14 @@ class PaletteList extends Component {
     }
 
     openDialog(id) {
-        this.setState( {
+        this.setState({
             openDeleteDialog: true,
-            deletingId: id});
+            deletingId: id
+        });
     }
 
     closeDialog() {
-        this.setState( {openDeleteDialog: false, deletingId: ''});
+        this.setState({ openDeleteDialog: false, deletingId: '' });
     }
 
     handleDelete() {
@@ -49,9 +51,10 @@ class PaletteList extends Component {
         this.props.history.push(`/palette/${id}`);
     }
 
+
     render() {
         const { palettes, classes } = this.props;
-        const {openDeleteDialog} = this.state;
+        const { openDeleteDialog } = this.state;
         return (
             <div className={classes.root}>
                 <div className={classes.container}>
@@ -59,6 +62,20 @@ class PaletteList extends Component {
                         <h1 className={classes.heading}>React Color Palettes</h1>
                         <Link to="/palette/new">New Palette</Link>
                     </nav>
+                    
+                    {palettes.length === 0 &&
+                        <div className={classes.reloadButton}>
+                            <Button
+                                variant='contained'
+                                color='secondary'
+                                type='button'
+                                onClick={this.props.reloadPalettes}
+                            >
+                                Reload starter colors
+                        </Button>
+                        </div>
+                    }
+
 
                     <TransitionGroup className={classes.palettes}>
                         {palettes.map(p => (
@@ -67,18 +84,20 @@ class PaletteList extends Component {
                                     key={p.id} {...p}
                                     id={p.id}
                                     handleClick={() => this.goToPalette(p.id)}
-                                    openDialog={this.openDialog } />
-                                    
+                                    openDialog={this.openDialog} />
+
                             </CSSTransition>
                         ))}
                     </TransitionGroup>
                 </div>
+
+
                 <Dialog open={openDeleteDialog} onClose={this.closeDialog} >
                     <DialogTitle>Delete Palette?</DialogTitle>
                     <List>
                         <ListItem button onClick={this.handleDelete}>
                             <ListItemAvatar>
-                                <Avatar style={{background: blue[100], color: blue[600]}}>
+                                <Avatar style={{ background: blue[100], color: blue[600] }}>
                                     <CheckIcon />
                                 </Avatar>
                             </ListItemAvatar>
@@ -86,7 +105,7 @@ class PaletteList extends Component {
                         </ListItem>
                         <ListItem button onClick={this.closeDialog}>
                             <ListItemAvatar>
-                                <Avatar style={{background: red[100], color: red[600]}}>
+                                <Avatar style={{ background: red[100], color: red[600] }}>
                                     <CloseIcon />
                                 </Avatar>
                             </ListItemAvatar>

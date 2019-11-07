@@ -45,6 +45,12 @@ export default {
             color: "white",
         }
     },
+    reloadButton: {
+        display: "flex",
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "space-between"
+    },
     palettes: {
         boxSizing: "border-box",
         width: "100%",
