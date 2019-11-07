@@ -27,13 +27,13 @@ export default {
         },
     },
     copyText: {
-        color: props => chroma(props.background).luminance() >= 0.65 ? "black" : "white"
+        color: props => chroma(props.background).luminance() >= 0.065 ? "black" : "white"
     },
     colorName: {
-        color: props => chroma(props.background).luminance() <= 0.65 ? "white" : "black"
+        color: props => chroma(props.background).luminance() <= 0.065 ? "white" : "black"
     },
     seeMoreButton: {
-        color: props => chroma(props.background).luminance() >= 0.65 ? "rgba(0,0,0,0.5)" : "white",
+        color: props => chroma(props.background).luminance() >= 0.065 ? "rgba(0,0,0,0.5)" : "white",
         background: "rgba( 255, 255, 255, 0.3)",
         position: "absolute",
         border: "none",
@@ -46,7 +46,7 @@ export default {
         textTransform: "uppercase"
     },
     copyButton: {
-        color: props => chroma(props.background).luminance() >= 0.65 ? "rgba(0,0,0,0.5)"  : "white",
+        color: props => chroma(props.background).luminance() >= 0.065 ? "rgba(0,0,0,0.5)"  : "white",
         width: "100px",
         height: "30px",
         position: "absolute",
