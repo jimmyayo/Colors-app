@@ -19,7 +19,7 @@ function MiniPalette(props) {
     }
 
     return (
-        <div className={classes.root} onClick={props.handleClick}>
+        <div className={classes.root} onClick={() => props.handleClick(props.id) }>
             <DeleteIcon className={classes.deleteIcon} onClick={deletePalette} />
 
             <div className={classes.colors}>

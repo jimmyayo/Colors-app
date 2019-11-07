@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-// import './ColorBox.css';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
-import chroma from 'chroma-js';
 import { withStyles } from '@material-ui/styles';
 import styles from './styles/ColorBoxStyles';
 
@@ -24,8 +22,6 @@ class ColorBox extends Component {
     render() {
         const {name, background, paletteId, id, showingFullPalette, classes} = this.props;
         const {showingOverlay} = this.state;
-        const isDark = chroma(background).luminance() <= 0.065;
-        const isLight = chroma(background).luminance() >= 0.065;
 
         return (
             <CopyToClipboard text={background} onCopy={this.changeCopyState}>

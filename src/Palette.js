@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import ColorBox from './ColorBox';
-import {generatePalate} from './colorHelpers';
 import Navbar from './Navbar';
 import PaletteFooter from './PaletteFooter';
 import { withStyles } from '@material-ui/styles'
-import { classes } from 'istanbul-lib-coverage';
 import styles from './styles/PaletteStyles';
 
 
