@@ -88,7 +88,6 @@ class App extends Component {
                       {...routeProps} />
                   </Page>
                 )}
-
               />
 
               <Route
@@ -104,6 +103,18 @@ class App extends Component {
                   </Page>
                 )}
               />
+              <Route
+                render={routeProps => (
+                  <Page {...routeProps} prevLocation={routeProps.location.pathname}>
+                    <PaletteList 
+                      palettes={this.state.palettes} 
+                      deletePalette={this.deletePalette} 
+                      {...routeProps} />
+                  </Page>
+                )}
+
+              />
+
             </Switch>
           </CSSTransition>
         </TransitionGroup>
