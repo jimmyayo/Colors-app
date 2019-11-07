@@ -35,6 +35,7 @@ function PaletteInfoForm (props) {
       emoji: emoji.native
     };
     props.handleSubmit(newPalette);
+    setStage('');
   }
 
   return (
